@@ -2,9 +2,8 @@
 
 ;; auto-to-list
 (add-to-list 'load-path "~/.emacs.d/plugins")
-(add-to-list 'load-path "~/.emacs.d/plugins/cursor-change")
 (add-to-list 'load-path "~/.emacs.d/plugins/autopair")
-(add-to-list 'load-path "~/.emacs.d/plugins/powerline")
+;(add-to-list 'load-path "~/.emacs.d/plugins/powerline")
 
 
 ;(which-function-mode)
@@ -62,11 +61,12 @@
 
 ;; autopair-configuration
 (require 'autopair)
-(autopair-global-mode)
+(autopair-global-mode 1)
 
 ;; Cursor-change
-(require 'cursor-change)
-(cursor-change-mode 't)
+(require 'cursor-chg)
+(change-cursor-mode) ; On for overwrite/read-only/input mode
+(toggle-cursor-type-when-idle 1) ; On when idle
 
 ;; for colorful parentheses
 (require 'rainbow-delimiters)
@@ -87,7 +87,7 @@
  '(rainbow-delimiters-unmatched-face ((t (:foreground "red")))))
 
 ;; Emacs Package Manager
-(setq package-list '(company google-c-style neotree))
+(setq package-list '(company google-c-style neotree flycheck powerline))
 (if (>= emacs-major-version 24)
   (progn (require 'package)
     (add-to-list 'package-archives
@@ -106,7 +106,7 @@
   (unless (package-installed-p package)
       (package-install package)))
 
-(require 'powerline)
+;(require 'powerline)
 (add-hook 'after-init-hook 'powerline-default-theme)
 
 
@@ -115,6 +115,9 @@
 (setq company-minimum-prefix-length 1)
 
 (load "~/.emacs.d/coding/cc.el")
+(setq auto-mode-alist
+  (cons '("\.js" . js-mode) auto-mode-alist))
+(load "~/.emacs.d/coding/js.el")
 
 ;; flycheck
 (add-hook 'after-init-hook #'global-flycheck-mode)
