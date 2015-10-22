@@ -18,7 +18,7 @@ time=$time_enabled
 local git_branch='$(git_prompt_info)%{$reset_color%}'
 
 # PROMPT="${git_branch} ${time}%{$fg[green]%} $%{$reset_color%}"
-PROMPT="${git_branch}${time_enabled} %(?.%{$fg[green]%}.%{$fg[red]%})%%%{$reset_color%} "
+PROMPT="${time_enabled} %(?.%{$fg[green]%}.%{$fg[red]%})%%%{$reset_color%} "
 
 ZSH_THEME_GIT_PROMPT_PREFIX="%(?.%{$fg[green]%}.%{$fg[red]%})|"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%(?.%{$fg[green]%}.%{$fg[red]%})|%{$reset_color%}"
