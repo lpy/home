@@ -3,6 +3,18 @@
 (add-hook 'c-mode-common-hook 'google-make-newline-indent)
 (add-hook 'c++-mode-hook 'google-make-newline-indent)
 
+(defconst my-c-style
+  '((c-tab-alwyas-indent . t)
+    (c-offsets-alist . ((access-label . /))))
+  "Google Style Indentation")
+
+(defun my-gcpp-style-hook ()
+  (c-add-style "gcppstyle" my-c-style t)
+  (setq c-default-style
+    '((c-mode . "gcppstyle") (c++-mode . "gcppstyle"))))
+
+(add-hook 'c++-mode-hook 'my-gcpp-style-hook)
+
 ;;(add-to-list 'load-path "~/source/rtags/src")
 ;;(require 'rtags)
 ;;(load "~/source/rtags/src/company-rtags.el")
