@@ -18,6 +18,7 @@
 (setq column-number-mode t)
 (global-linum-mode 1)
 (setq-default kill-whole-line t)
+(setq-default indent-tabs-mode nil)
 
 (if (eq system-type 'darwin)
   (set-keyboard-coding-system nil))
