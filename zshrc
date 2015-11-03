@@ -55,6 +55,9 @@ plugins=(git brew python ruby)
 
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$PATH:~/depot_tools
+if [[ `uname` != 'Darwin' ]]; then
+  export CHROME_DEVEL_SANDBOX=/usr/local/sbin/chrome-devel-sandbox
+fi
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
