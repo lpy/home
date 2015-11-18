@@ -28,3 +28,4 @@ color desert
 :command QA qa
 
 set nobackup
+set mouse=nicr
