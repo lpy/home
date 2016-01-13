@@ -88,7 +88,7 @@
  '(rainbow-delimiters-unmatched-face ((t (:foreground "red")))))
 
 ;; Emacs Package Manager
-(setq package-list '(company google-c-style neotree flycheck powerline))
+(setq package-list '(company google-c-style neotree flycheck powerline company-jedi))
 (if (>= emacs-major-version 24)
   (progn (require 'package)
     (add-to-list 'package-archives
@@ -114,11 +114,13 @@
 (add-hook 'after-init-hook 'global-company-mode) ;; company-mode
 (setq company-idle-delay 0.2)
 (setq company-minimum-prefix-length 1)
+(setq company-dabbrev-ignore-case nil)
 
 (load "~/.emacs.d/coding/cc.el")
 (setq auto-mode-alist
-  (cons '("\.js" . js-mode) auto-mode-alist))
+  (cons '("\\.js$" . js-mode) auto-mode-alist))
 (load "~/.emacs.d/coding/js.el")
+(load "~/.emacs.d/coding/py.el")
 
 ;; flycheck
 (add-hook 'after-init-hook #'global-flycheck-mode)

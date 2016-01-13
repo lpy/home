@@ -11,9 +11,17 @@
 (defun my-gcpp-style-hook ()
   (c-add-style "gcppstyle" my-c-style t)
   (setq c-default-style
-    '((c-mode . "gcppstyle") (c++-mode . "gcppstyle"))))
+        '((c-mode . "gcppstyle") (c++-mode . "gcppstyle"))))
 
 (add-hook 'c++-mode-hook 'my-gcpp-style-hook)
+
+(defconst my-cc-style
+  '("cc-mode"
+    (c-offsets-alist . ((innamespace . 0)))))
+(c-add-style "my-cc-mode" my-cc-style)
+
+(setq auto-mode-alist
+  (cons '("\.h$" . c++-mode) auto-mode-alist))
 
 ;;(add-to-list 'load-path "~/source/rtags/src")
 ;;(require 'rtags)
