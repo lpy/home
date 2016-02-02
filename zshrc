@@ -54,7 +54,7 @@ plugins=(git brew python ruby)
 # User configuration
 
 export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH=$PATH:~/depot_tools
+export PATH=~/depot_tools:$PATH:~/depot_tools
 if [[ `uname` != 'Darwin' ]]; then
   export CHROME_DEVEL_SANDBOX=/usr/local/sbin/chrome-devel-sandbox
 fi
