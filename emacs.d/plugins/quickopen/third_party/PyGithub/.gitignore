@@ -1,0 +1,6 @@
+*.pyc
+GithubCredentials.py
+.coverage
+/dist
+/MANIFEST
+/test/htmlcov/

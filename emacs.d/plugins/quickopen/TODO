@@ -1,0 +1,57 @@
+Bugs
+---------------------------------------------------------------------------
+
+Rewrite to use multiprocessing.Proces instead of Pool to reduce
+fd-leak-until-GC during tests
+
+Emacs ff-find-*-file mode doesnt work in non-GUI environment
+[curses UI being async is the core issue]
+
+"filter_text" : "Øfd" --> wont work in most places
+
+curses UI doesn't know when the terminal resized.
+
+--skip-ui-if-exact opens gui even if in non-gui editor in emacs
+
+Features
+---------------------------------------------------------------------------
+- find_based_db_indexer has to split every basename on / and then
+  apply every glob against each part. This seems unnecessarily slow.
+
+
+- Rank files "nearer" to the current file when there are multiple equivalent matches
+   e.g.
+      foo/tracing/overlay.js
+      foo/shared/cr/js/overlay.js
+   with cwd=foo/xxx.js
+      no boost
+
+   with cwd=foo/tracing/xxx.js
+      boost foo/tracing/overlay.js
+
+   with cwd=foo/shared/cr/xxx.js
+      boost foo/shared/cr/overlay.js
+
+  Possibly, ignore extension during this resolution step. E.g.
+      test_utils.js  from shared/tracing
+      typically hits ../../../...../test_utils.cc but
+      also there is a test_utils.js in the same folder.
+
+- Try out Goog codesearch-style trigraph-based indexes for fuzzy matching
+
+- rwh::ddu -> use ctags to do fuzzy search for ddu on the files matching rwh
+
+- Add fuzziness to dir matching and ranking?
+
+- Reduce memory footprint
+
+- Right click to ignore an object in open dialog
+
+- Warning bar if search() truncated
+
+- emacs ffap-alist support
+
+- qo-modded ff-find-*-file should catch things like foo.cc -> foo_unittest.cc or foo_test.py
+
+- Dont use extensions in raw index; fix those up afterward.
+

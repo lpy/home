@@ -179,5 +179,6 @@
     (mark-paragraph)
     (indent-region (region-beginning) (region-end) nil)))
 
+(load "~/.emacs.d/plugins/quickopen/elisp/quickopen.el")
 
 ;;;;;;;;;; Self-customized function End
