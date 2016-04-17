@@ -1,3 +1,6 @@
+(setq auto-mode-alist
+  (cons '("\\.js$" . js-mode) auto-mode-alist))
+
 (defun open-line-and-indent (n)
   "Insert a newline, indent it, and leave point indented before it."
   (interactive "*p")
