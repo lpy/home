@@ -20,6 +20,8 @@
 (setq-default kill-whole-line t)
 (setq-default indent-tabs-mode nil)
 
+(setq-default truncate-lines 1) ;; no wrap
+
 (if (eq system-type 'darwin)
   (set-keyboard-coding-system nil))
 (when window-system
