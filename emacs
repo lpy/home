@@ -47,7 +47,8 @@
 (auto-image-file-mode t) 
 (setq frame-title-format "%n%F/%b")
 (setq kill-ring-max 250)
-(set-default-font "Monaco-16") ;; font
+(if (eq system-type 'darwin)
+  (set-default-font "Monaco-16")) ;; font
 (setq inhibit-startup-message t)
 ;; windows size when launched
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
@@ -57,6 +58,7 @@
 (setq display-time-24hr-format t)
 (setq display-time-day-and-date t)
 (display-time)
+(setq display-time-default-load-average nil)
 (setq-default make-backup-files nil) ;; Don't create the temp file
 (setq auto-save-mode nil) ;; turn offf auto save
 (setq auto-save-default nil) ;; turn off temporary file
@@ -119,8 +121,6 @@
 (setq company-dabbrev-ignore-case nil)
 
 (load "~/.emacs.d/coding/cc.el")
-(setq auto-mode-alist
-  (cons '("\\.js$" . js-mode) auto-mode-alist))
 (load "~/.emacs.d/coding/js.el")
 (load "~/.emacs.d/coding/py.el")
 
