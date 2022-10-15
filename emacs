@@ -92,11 +92,17 @@
  '(rainbow-delimiters-unmatched-face ((t (:foreground "red")))))
 
 ;; Emacs Package Manager
-(setq package-list '(company google-c-style neotree flycheck powerline company-jedi))
-(if (>= emacs-major-version 24)
-  (progn (require 'package)
-    (add-to-list 'package-archives
-      '("melpa" . "http://melpa.milkbox.net/packages/") t)))
+(setq package-list '(company flycheck flycheck-google-cpplint neotree powerline company-jedi))
+
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/"))
+(add-to-list 'package-archives '("elpa" . "https://elpa.gnu.org/packages/"))
+
+;; (if (>= emacs-major-version 24)
+;;   (progn (require 'package)
+;;     (add-to-list 'package-archives
+;;       '("melpa" . "http://melpa.milkbox.net/packages/") t)))
     ;(add-to-list 'package-archives
     ;  '("marmalade" . "http://marmalade-repo.org/packages/") t)
     ;(add-to-list 'package-archives
