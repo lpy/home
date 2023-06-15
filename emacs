@@ -3,7 +3,7 @@
 ;; auto-to-list
 (add-to-list 'load-path "~/.emacs.d/plugins")
 (add-to-list 'load-path "~/.emacs.d/plugins/autopair")
-;(add-to-list 'load-path "~/.emacs.d/plugins/powerline")
+(add-to-list 'load-path "~/.emacs.d/plugins/powerline")
 
 
 ;(which-function-mode)
@@ -92,7 +92,7 @@
  '(rainbow-delimiters-unmatched-face ((t (:foreground "red")))))
 
 ;; Emacs Package Manager
-(setq package-list '(company flycheck flycheck-google-cpplint neotree powerline company-jedi))
+(setq package-list '(company flycheck flycheck-google-cpplint neotree company-jedi))
 
 (require 'package)
 (add-to-list 'package-archives
@@ -117,7 +117,7 @@
   (unless (package-installed-p package)
       (package-install package)))
 
-;(require 'powerline)
+(require 'powerline)
 (add-hook 'after-init-hook 'powerline-default-theme)
 
 
