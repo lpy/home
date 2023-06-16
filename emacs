@@ -32,8 +32,8 @@
   (shell-command-to-string "pbpaste"))
 (defun paste-to-osx (text &optional push)
   (let ((process-connection-type nil))
-    (let ((proc (start-process"pbcopy" "*Messages*" "pbcopy"))) 
-      (process-send-string proc text) 
+    (let ((proc (start-process"pbcopy" "*Messages*" "pbcopy")))
+      (process-send-string proc text)
       (process-send-eof proc))))
 (if (eq system-type 'darwin)
   (unless window-system
@@ -44,16 +44,18 @@
 
 (put 'scroll-left 'disabled nil) ;; remove scroll
 (mouse-avoidance-mode 'animate)
-(auto-image-file-mode t) 
+(auto-image-file-mode t)
 (setq frame-title-format "%n%F/%b")
 (setq kill-ring-max 250)
 (if (eq system-type 'darwin)
-  (set-default-font "Monaco-16")) ;; font
+    (set-default-font "Monaco-16")) ;; font
+(if (eq system-type 'darwin)
+    (set-default-font "Monospace-11")) ;; font
 (setq inhibit-startup-message t)
 ;; windows size when launched
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 ;;(setq default-frame-alist
-;;      '((height . 50) (width . 150) (menu-bar-lines . 20) (tool-bar-lines . 0))) 
+;;      '((height . 50) (width . 150) (menu-bar-lines . 20) (tool-bar-lines . 0)))
 
 (setq display-time-24hr-format t)
 (setq display-time-day-and-date t)
@@ -79,7 +81,11 @@
 (add-hook 'scheme-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
 (custom-set-faces
- '(default ((t (:inherit nil :stipple nil :background "Black" :foreground "SteelBlue" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 128 :width normal :foundry "unknown" :family "monaco"))))
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:inherit nil :stipple nil :background "Black" :foreground "SteelBlue" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 113 :width normal :foundry "PfEd" :family "DejaVu Sans Mono"))))
  '(rainbow-delimiters-depth-1-face ((t (:foreground "green"))))
  '(rainbow-delimiters-depth-2-face ((t (:foreground "gold"))))
  '(rainbow-delimiters-depth-3-face ((t (:foreground "deep sky blue"))))
@@ -95,20 +101,13 @@
 (setq package-list '(company flycheck flycheck-google-cpplint neotree company-jedi))
 
 (require 'package)
-(add-to-list 'package-archives
-             '("melpa-stable" . "https://stable.melpa.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+;; (add-to-list 'package-archives
+;;              '("melpa-stable" . "https://stable.melpa.org/packages/"))
 (add-to-list 'package-archives '("elpa" . "https://elpa.gnu.org/packages/"))
 
-;; (if (>= emacs-major-version 24)
-;;   (progn (require 'package)
-;;     (add-to-list 'package-archives
-;;       '("melpa" . "http://melpa.milkbox.net/packages/") t)))
-    ;(add-to-list 'package-archives
-    ;  '("marmalade" . "http://marmalade-repo.org/packages/") t)
-    ;(add-to-list 'package-archives
-    ;  '("org". "http://orgmode.org/elpa/") t)))
 (package-initialize)
-; fetch the list of packages available 
+; fetch the list of packages available
 (unless package-archive-contents
   (package-refresh-contents))
 
@@ -129,12 +128,14 @@
 (load "~/.emacs.d/coding/cc.el")
 (load "~/.emacs.d/coding/js.el")
 (load "~/.emacs.d/coding/py.el")
+(load "~/.emacs.d/coding/google-c-style.el")
 
 ;; flycheck
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
 ;;;;;;;;;; Self-customized function Begin
 
+(add-hook 'c-mode-common-hook 'google-set-c-style)
 
 (defadvice comment-or-uncomment-region (before slickcomment activate compile)
   "When called interactively with no active region, toggle comment on current line instead."
@@ -190,3 +191,12 @@
 (load "~/.emacs.d/plugins/quickopen/elisp/quickopen.el")
 
 ;;;;;;;;;; Self-customized function End
+
+;;; .emacs ends here
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(zenburn-theme yasnippet-snippets yaml-mode which-key undo-tree tabbar session rust-mode puppet-mode pod-mode muttrc-mode mutt-alias lsp-mode initsplit ido-completing-read+ htmlize graphviz-dot-mode goto-chg gitignore-mode gitconfig-mode gitattributes-mode git-modes folding ess eproject editorconfig diminish csv-mode color-theme-modern browse-kill-ring boxquote bm bar-cursor apache-mode telephone-line powerline neotree flycheck-google-cpplint company-jedi)))
