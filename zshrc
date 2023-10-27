@@ -98,6 +98,3 @@ if [[ `uname` == 'Darwin' ]];  then
 fi
 
 alias gpc="git commit --author \"Peiyong Lin <linpyong@gmail.com>\""
-alias chrome_debug='`cat ~/.markutils/m0`/out/Debug/${CHROME_APP}'
-alias chrome_release='`cat ~/.markutils/m0`/out/Release/${CHROME_APP}'
-source ~/bin/markutils

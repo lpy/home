@@ -48,9 +48,9 @@
 (setq frame-title-format "%n%F/%b")
 (setq kill-ring-max 250)
 (if (eq system-type 'darwin)
-    (set-default-font "Monaco-16")) ;; font
-(if (eq system-type 'darwin)
-    (set-default-font "Monospace-11")) ;; font
+    (set-frame-font "Monaco-16")) ;; font
+(if (eq system-type 'gnu/linux)
+    (set-frame-font "Monospace-14")) ;; font
 (setq inhibit-startup-message t)
 ;; windows size when launched
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
@@ -65,6 +65,25 @@
 (setq auto-save-mode nil) ;; turn offf auto save
 (setq auto-save-default nil) ;; turn off temporary file
 (fset 'yes-or-no-p 'y-or-n-p) ;; using 'y' and 'n' to replace 'yes' and 'no'
+
+;; Emacs Package Manager
+(setq package-list '(rainbow-delimiters company flycheck flycheck-google-cpplint neotree company-jedi))
+
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+;; (add-to-list 'package-archives
+;;              '("melpa-stable" . "https://stable.melpa.org/packages/"))
+(add-to-list 'package-archives '("elpa" . "https://elpa.gnu.org/packages/"))
+
+(package-initialize)
+; fetch the list of packages available
+(unless package-archive-contents
+  (package-refresh-contents))
+
+; install the missing packages
+(dolist (package package-list)
+  (unless (package-installed-p package)
+      (package-install package)))
 
 ;; autopair-configuration
 (require 'autopair)
@@ -85,7 +104,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "Black" :foreground "SteelBlue" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 113 :width normal :foundry "PfEd" :family "DejaVu Sans Mono"))))
+ '(default ((t (:inherit nil :stipple nil :background "Black" :foreground "SteelBlue" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 151 :width normal :foundry "PfEd" :family "DejaVu Sans Mono"))))
  '(rainbow-delimiters-depth-1-face ((t (:foreground "green"))))
  '(rainbow-delimiters-depth-2-face ((t (:foreground "gold"))))
  '(rainbow-delimiters-depth-3-face ((t (:foreground "deep sky blue"))))
@@ -96,25 +115,6 @@
  '(rainbow-delimiters-depth-8-face ((t (:foreground "RosyBrown2"))))
  '(rainbow-delimiters-depth-9-face ((t (:foreground "gray100"))))
  '(rainbow-delimiters-unmatched-face ((t (:foreground "red")))))
-
-;; Emacs Package Manager
-(setq package-list '(company flycheck flycheck-google-cpplint neotree company-jedi))
-
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-;; (add-to-list 'package-archives
-;;              '("melpa-stable" . "https://stable.melpa.org/packages/"))
-(add-to-list 'package-archives '("elpa" . "https://elpa.gnu.org/packages/"))
-
-(package-initialize)
-; fetch the list of packages available
-(unless package-archive-contents
-  (package-refresh-contents))
-
-; install the missing packages
-(dolist (package package-list)
-  (unless (package-installed-p package)
-      (package-install package)))
 
 (require 'powerline)
 (add-hook 'after-init-hook 'powerline-default-theme)
@@ -134,6 +134,8 @@
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
 ;;;;;;;;;; Self-customized function Begin
+
+(global-subword-mode 1)
 
 (add-hook 'c-mode-common-hook 'google-set-c-style)
 
@@ -193,10 +195,3 @@
 ;;;;;;;;;; Self-customized function End
 
 ;;; .emacs ends here
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(zenburn-theme yasnippet-snippets yaml-mode which-key undo-tree tabbar session rust-mode puppet-mode pod-mode muttrc-mode mutt-alias lsp-mode initsplit ido-completing-read+ htmlize graphviz-dot-mode goto-chg gitignore-mode gitconfig-mode gitattributes-mode git-modes folding ess eproject editorconfig diminish csv-mode color-theme-modern browse-kill-ring boxquote bm bar-cursor apache-mode telephone-line powerline neotree flycheck-google-cpplint company-jedi)))
